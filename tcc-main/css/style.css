@@ -1,0 +1,419 @@
+/*header*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Krona+One&display=swap');
+
+:root {
+    --cor1: #2481EF;
+    --white: #fff;
+    --black: #000000;
+    --popup: #f8f8f8; 
+    --cinzaclaro: #c5c5c5;
+    --shadow2: rgba(160, 160, 160, 0.281);
+    --shadow1: rgba(134, 134, 134, 0.281);
+}
+
+/*main*/
+
+main{
+       padding-top: 90px;
+}
+
+#container_main_principal{
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+#info_diaria{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    display:flex;
+    color: var(--white);
+}
+
+#barra_lateral{
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 440px;
+    width: 5px;
+    background-color: var(--white);
+}
+
+#conteudo_diario{
+    margin: auto 0;
+}
+
+#umidade{
+    font-size: 45px;
+    margin-left: -5px;
+    line-height: 0.8;
+}
+
+#time{
+    font-size: 350px;
+    line-height: 0.8;
+    margin-left: -10px;
+}
+
+#conteudo_menor{
+    display:flex;
+    position: relative;
+    margin-left: -7px;
+}
+
+#date{
+    font-size: 120px;
+    line-height: 0.8;
+}
+
+#day{
+    font-size: 70px;
+    line-height: 0.8;
+}
+
+#temperatura{
+    font-size: 100px;
+    line-height: 0.8;
+    right: 20px;
+    position: absolute;
+}
+
+#diario {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: lightgreen; /* Cor de fundo para visualização */
+    width: 600px;
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    background-color: rgba(0, 0, 0, 0.37);
+    padding: 16px;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+}
+#bloco {
+    position: absolute;
+    top: 100vh; /* Corrigido para iniciar dentro da visualização */
+    background-color: rgba(0, 0, 0, 0.37);
+    width: 100%;
+    height: 100vh; /* Altura automática para se ajustar ao conteúdo */
+    padding: 20px; /* Aumentado para melhor espaçamento interno */
+    display: flex;
+    flex-direction: row; /* Organiza o conteúdo em coluna */
+    align-items: baseline; /* Centraliza os itens */
+    justify-content: baseline; /* Centraliza os itens verticalmente */
+    box-sizing: border-box; /* Para considerar padding no tamanho total */
+}
+.grafico {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.37);
+    width: 50%;
+    height: 50vh; /* Altura automática para se ajustar ao conteúdo */
+    padding: 20px; /* Aumentado para melhor espaçamento interno */
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column; /* Organiza o conteúdo em coluna */
+    align-items: center; /* Centraliza os itens */
+    box-sizing: border-box; /* Para considerar padding no tamanho total */
+}
+canvas {
+    width: 100%; /* Para ocupar toda a largura do bloco */
+    height: 70%; /* Para ocupar 70% da altura do bloco */
+    margin-bottom: 20px; /* Espaço entre o gráfico e as informações */
+}
+#temperature-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.37); /* Cor de fundo */
+    border-radius: 15px;
+    width: 200px;
+    height: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.section-uv, .section-wind {
+    background-color: rgba(0, 0, 0, 0.37); /* Fundo transparente escuro */
+    border-radius: 25px;
+    padding: 20px;
+    box-sizing: border-box;
+    flex: 1;
+    min-width: 250px;
+    max-width: 30%;
+    text-align: center;
+    color: white;
+}
+
+/* Ícones adaptáveis para UV e Vento */
+.uv-icon, .wind-icon {
+    font-size: 50px; /* Tamanho do ícone */
+    margin-bottom: 10px;
+}
+
+/* Cores e estilos adaptáveis ao valor de UV */
+.uv-low {
+    color: #00FF00; /* Verde para UV baixo */
+}
+.uv-moderate {
+    color: #FFFF00; /* Amarelo para UV moderado */
+}
+.uv-high {
+    color: #FF4500; /* Laranja para UV alto */
+}
+.uv-very-high {
+    color: #FF0000; /* Vermelho para UV muito alto */
+}
+.uv-extreme {
+    color: #8B0000; /* Vermelho escuro para UV extremo */
+}
+
+/* Estilos para a velocidade do vento */
+.wind-low {
+    color: #00BFFF; /* Azul claro para vento fraco */
+}
+.wind-moderate {
+    color: #1E90FF; /* Azul para vento moderado */
+}
+.wind-strong {
+    color: #0000CD; /* Azul escuro para vento forte */
+}
+.wind-very-strong {
+    color: #000080; /* Azul muito escuro para vento muito forte */
+}
+
+/* Ícone da temperatura */
+.temperature-icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+    color: #FF5733; /* Cor inicial */
+    transition: all 0.3s ease; /* Suavização das mudanças */
+}
+
+/* Valor da temperatura */
+.temperature-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Mudança de cor e tamanho do ícone com base na temperatura */
+.temperature-hot .temperature-icon {
+    color: #FF5733; /* Vermelho quente */
+    font-size: 70px; /* Ícone maior */
+}
+
+.temperature-warm .temperature-icon {
+    color: #FFC300; /* Amarelo */
+    font-size: 60px; /* Ícone médio */
+}
+
+.temperature-cool .temperature-icon {
+    color: #3498db; /* Azul */
+    font-size: 50px; /* Ícone menor */
+}
+
+.temperature-cold .temperature-icon {
+    color: #1E90FF; /* Azul claro */
+    font-size: 40px; /* Ícone pequeno */
+}
+
+/* Estilo adicional para visualização */
+
+#info_clima {
+    color: white; /* Cor do texto das informações climáticas */
+    text-align: center; /* Centraliza o texto */
+    display: none;
+}
+
+
+.section_dia{
+    width: 100%;
+    padding: 0 20px;
+   
+
+}
+
+.dia_titulo{
+    display: flex;
+    justify-content:left;
+    align-items: center;
+    color: var(--white);
+    position: relative;
+    padding: 10px 0;
+    height: 100%;
+    width: 100%;
+}
+
+.icon_calendar{
+    width: 25px;
+    height: 25px;
+    color: var(--black);
+    margin-right: 15px;
+    background-color: aliceblue;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+
+.icon_calendar ion-icon{
+
+}
+
+.dia_titulo h2{
+    color: var(--white);
+    text-align: left;
+}
+
+.barra_horizontal{
+    border: 1px solid var(--white);
+    width: calc(100% - 46px);
+}
+
+.dia{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--white);
+    position: relative;
+    padding: 15px 0;
+    height: 100%;
+    width: 100%;
+}
+
+.icon_thermal{
+    width: 20px;
+    height: 20px;
+    color: var(--white);
+}
+
+#sec_btn_dados {
+    position: absolute;
+    bottom: 0;
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translateX(-50%); /* Ajusta o posicionamento para o centro */
+    width: 100px; /* Defina a largura desejada */
+    height: 100px; /* Defina a altura desejada */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#btn_dados{
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: white; /* Cor do botão */
+    cursor: pointer;
+    
+}
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px); /* Sobe 10px */
+    }
+    100% {
+        transform: translateY(0); /* Volta para o ponto original */
+    }
+}
+
+#btn_dados {
+    background-color: #000000; /* Cor de fundo do botão */
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: float 2s infinite; 
+}
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px); /* Sobe 10px */
+    }
+    100% {
+        transform: translateY(0); /* Volta para o ponto original */
+    }
+}
+
+#btn_dados:hover {
+    background-color: var(--blue); /* Cor ao passar o mouse */
+    
+    transform: scale(1.1); /* Animação ao passar o mouse */
+}
+
+
+
+#btn_dados i {
+    color: white;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    animation: pulse 1.5s infinite; /* Animação de pulsar contínua */
+}
+
+#btn_dados:hover i {
+    transform: translateY(5px); /* Animação da seta ao passar o mouse */
+}
+
+
+
+/*API*/
+
+.section_dia {
+    width: 100%; /* Largura total do bloco */
+    margin-bottom: 10px; /* Espaçamento inferior */
+}
+
+.forecast_day {
+    padding: 8px 12px; /* Padding menor */
+    margin: 5px 0; /* Margem vertical para espaçamento */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    display: flex; /* Flex para alinhar elementos horizontalmente */
+    justify-content: space-between; /* Espaço entre os elementos */
+    width: 100%; /* Largura total */
+    font-size: 14px; /* Tamanho da fonte reduzido */
+}
+
+ion-icon {
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+
+  .section_title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff; /* Cor branca para o texto */
+  }
+
+  .section_title ion-icon {
+    font-size: 2rem;
+    color: #fff; /* Cor branca para o ícone */
+  }
+
+
+  
